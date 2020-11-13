@@ -60,7 +60,7 @@ class player {
         this.name = name;
         this.canThrowBall = canThrowBall;
         this.canDodgeBall = canDodgeBall;
-        this.hasPaid = true;
+        this.hasPaid = hasPaid;
         this.isHealthy = isHealthy;
         this.yearsExperience = yearsExperience;
     }
@@ -84,6 +84,8 @@ class redTeammate{
 
 const listPeopleChoices = () => {
     const listElement = document.getElementById('people')
+    document.getElementById("playerList").innerHTML = "Assign each player to a team.  3 players per team."
+    document.getElementById("peopleList").innerHTML = "Select people to make them players."
     arrOfPeople.map(person => {
         const li = document.createElement("li")
         const button = document.createElement("button")
@@ -91,6 +93,7 @@ const listPeopleChoices = () => {
         li.appendChild(button)
         li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
         listElement.append(li)
+        document.getElementById("listButton").style.display = "none"
         button.addEventListener('click', function() {
             makePlayer(person.id)
             this.parentElement.remove()
@@ -104,7 +107,7 @@ const makePlayer = (id) => {
     console.log(`li ${id} was clicked!`)
     for (let person of arrOfPeople) {
         if (person.id === id) {
-            let baller = new player(id, person.name)
+            let baller = new player(id, person.name, true, false, true, true, 3)
             listOfPlayers.push(baller)
         }
     }
@@ -116,23 +119,27 @@ const makePlayer = (id) => {
         const blueButton = document.createElement("button")
         redButton.innerHTML = "Red Team"
         blueButton.innerHTML = "Blue Team"
-        li.appendChild(redButton)
         li.appendChild(blueButton)
+        li.appendChild(redButton)
         li.appendChild(document.createTextNode(person.name + " - " + person.hasPaid))
         listElement.append(li)
         redButton.addEventListener('click', function() {
-            console.log("red click")
-            makeRedTeam(person.id)
-            this.parentElement.remove()
-            let index = listOfPlayers.indexOf(person)
-            listOfPlayers.splice(index, 1)
+            if (redTeam.length < 3) {
+                console.log("red click")
+                makeRedTeam(person.id)
+                this.parentElement.remove()
+                let index = listOfPlayers.indexOf(person)
+                listOfPlayers.splice(index, 1)
+            }
         })
         blueButton.addEventListener('click', function() {
-            console.log("blue click")
-            makeBlueTeam(person.id)
-            this.parentElement.remove()
-            let index = listOfPlayers.indexOf(person)
-            listOfPlayers.splice(index, 1)
+            if (blueTeam.length < 3) {
+                console.log("blue click")
+                makeBlueTeam(person.id)
+                this.parentElement.remove()
+                let index = listOfPlayers.indexOf(person)
+                listOfPlayers.splice(index, 1)
+            }
         }) 
     })
 }
@@ -161,8 +168,8 @@ const makeBlueTeam = (id) => {
     for (let person of listOfPlayers) {
         let bluePlayer = new blueTeammate(person.id, person.name)
         if (person.id === id) {
-            blueTeam.push(bluePlayer)
-            console.log(blueTeam)
+                blueTeam.push(bluePlayer)
+                console.log(blueTeam)
         }
     }
     blueTeam.map(person => {
@@ -172,7 +179,3 @@ const makeBlueTeam = (id) => {
     })
     
 }
-
-// const assignTeam = (x) => {
-//     console.log(x.parentElement.lastChild)
-// }

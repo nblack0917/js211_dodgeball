@@ -1,0 +1,66 @@
+
+body {
+    margin: 0 auto;
+    font-family: 'Merriweather', serif;
+}
+
+h4 {
+    font-weight: 900;
+}
+
+li {
+    padding: 3px 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.people {
+    /* background: chocolate; */
+    text-align: center;
+}
+
+#people, #players, #red, #blue{
+    text-align: left;
+    list-style: none;
+    padding: 0;
+}
+
+#people button {
+    margin-right: 10px;
+}
+
+.players {
+    text-align: center;
+}
+
+#players button:nth-child(1) {
+    color: white;
+    background: lightskyblue;
+    margin-right: 10px;
+}
+#players button:nth-child(2) {
+    color: white;
+    background: tomato;
+    margin-right: 10px;
+}
+
+.teams {
+    display: flex;
+}
+.teams div {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 50px;
+    background: lightskyblue;
+}
+
+.teams div:nth-child(2) {
+    background: tomato;
+}

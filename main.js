@@ -48,35 +48,97 @@ const arrOfPeople = [
       skillSet: "jump rope",
       placeBorn: "New Orleans, Louisiana"
     },
-  ]
-  
-  const listOfPlayers = []
-  const blueTeam = []
-  const redTeam = []
-  
-  class player {
-    constructor(){}
-  }
-  class blueTeammate {
-    constructor(){}
-  }
-  class redTeammate {
-    constructor(){}
-  }
-  
-  const listPeopleChoices = () => {
+];
+
+const listOfPlayers = []
+const blueTeam = []
+const redTeam = []
+
+class player {
+    constructor(id, name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+        this.id = id;
+        this.name = name;
+        this.canThrowBall = canThrowBall;
+        this.canDodgeBall = canDodgeBall;
+        this.hasPaid = true;
+        this.isHealthy = isHealthy;
+        this.yearsExperience = yearsExperience;
+    }
+}
+class blueTeammate extends player{
+    constructor(id, name, mascot, teamColor, canThrowBall, canDodgeBall, yearsExperience){
+        super(id, name, canThrowBall, canDodgeBall, yearsExperience);
+        this.mascot = "Leap Frog";
+        this.teamColor = "Blue";
+    }
+}
+class redTeammate extends player{
+    constructor(id, name, mascot, teamColor, canThrowBall, canDodgeBall, yearsExperience){
+        super(id, name, canThrowBall, canDodgeBall, yearsExperience);
+        this.mascot = "Dragon";
+        this.teamColor = "Red";
+    }
+}
+
+const listPeopleChoices = () => {
     const listElement = document.getElementById('people')
     arrOfPeople.map(person => {
-      const li = document.createElement("li")
-      const button = document.createElement("button")
-      button.innerHTML = "Make Player"
-      button.addEventListener('click', function() {makePlayer(person.id)} )
-      li.appendChild(button)
-      li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
-      listElement.append(li)
+        const li = document.createElement("li")
+        const button = document.createElement("button")
+        button.innerHTML = "Make Player"
+        li.appendChild(button)
+        li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+        listElement.append(li)
+        button.addEventListener('click', function() {
+            makePlayer(person.id)
+            this.parentElement.remove()
+            let index = arrOfPeople.indexOf(person)
+            arrOfPeople.splice(index, 1)
+        })  
     })
-  }
-  
-  const makePlayer = (id) => {
+}
+
+const makePlayer = (id) => {
     console.log(`li ${id} was clicked!`)
-  }
+    for (let person of arrOfPeople) {
+        if (person.id === id) {
+            let baller = new player(id, person.name)
+            listOfPlayers.push(baller)
+        }
+    }
+    const listElement = document.getElementById('players')
+    listElement.innerHTML = null;
+    listOfPlayers.map(person => {
+        const li = document.createElement("li")
+        const redButton = document.createElement("button")
+        const blueButton = document.createElement("button")
+        redButton.innerHTML = "Red Team"
+        blueButton.innerHTML = "Blue Team"
+        li.appendChild(redButton)
+        li.appendChild(blueButton)
+        li.appendChild(document.createTextNode(person.name + " - " + person.hasPaid))
+        listElement.append(li)
+        redButton.addEventListener('click', function() {
+            for (let person of listOfPlayers) {
+                if (person.id === id) {
+                    redTeam.push(person)
+                    console.log(redTeam)
+                }
+            }
+            this.parentElement.remove()
+            let index = listOfPlayers.indexOf(person)
+            listOfPlayers.splice(index, 1)
+        })
+        blueButton.addEventListener('click', function() {
+            for (let person of listOfPlayers) {
+                if (person.id === id) {
+                    blueTeam.push(person)
+                    console.log(blueTeam)
+                }
+            }
+            this.parentElement.remove()
+            let index = listOfPlayers.indexOf(person)
+            listOfPlayers.splice(index, 1)
+        }) 
+    })
+}

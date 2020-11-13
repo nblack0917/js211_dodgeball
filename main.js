@@ -65,16 +65,18 @@ class player {
         this.yearsExperience = yearsExperience;
     }
 }
-class blueTeammate extends player{
-    constructor(id, name, mascot, teamColor, canThrowBall, canDodgeBall, yearsExperience){
-        super(id, name, canThrowBall, canDodgeBall, yearsExperience);
+class blueTeammate{
+    constructor(id, name, mascot, teamColor){
+        this.id = id;
+        this.name = name;
         this.mascot = "Leap Frog";
         this.teamColor = "Blue";
     }
 }
-class redTeammate extends player{
-    constructor(id, name, mascot, teamColor, canThrowBall, canDodgeBall, yearsExperience){
-        super(id, name, canThrowBall, canDodgeBall, yearsExperience);
+class redTeammate{
+    constructor(id, name, mascot, teamColor){
+        this.id = id;
+        this.name = name;
         this.mascot = "Dragon";
         this.teamColor = "Red";
     }
@@ -119,26 +121,58 @@ const makePlayer = (id) => {
         li.appendChild(document.createTextNode(person.name + " - " + person.hasPaid))
         listElement.append(li)
         redButton.addEventListener('click', function() {
-            for (let person of listOfPlayers) {
-                if (person.id === id) {
-                    redTeam.push(person)
-                    console.log(redTeam)
-                }
-            }
+            console.log("red click")
+            makeRedTeam(person.id)
             this.parentElement.remove()
             let index = listOfPlayers.indexOf(person)
             listOfPlayers.splice(index, 1)
         })
         blueButton.addEventListener('click', function() {
-            for (let person of listOfPlayers) {
-                if (person.id === id) {
-                    blueTeam.push(person)
-                    console.log(blueTeam)
-                }
-            }
+            console.log("blue click")
+            makeBlueTeam(person.id)
             this.parentElement.remove()
             let index = listOfPlayers.indexOf(person)
             listOfPlayers.splice(index, 1)
         }) 
     })
 }
+
+const makeRedTeam = (id) => {
+    const listElement = document.getElementById('red')
+    listElement.innerHTML = null;
+    for (let person of listOfPlayers) {
+        if (person.id === id) {
+            let redPlayer = new redTeammate(person.id, person.name)
+            redTeam.push(redPlayer)
+            console.log(redTeam)
+        }
+    }
+    redTeam.map(person => {
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(`${person.name} - ${person.teamColor} team - Go ${person.mascot}s!`))
+        listElement.append(li)
+    })
+}
+
+
+const makeBlueTeam = (id) => {
+    const listElement = document.getElementById('blue')
+    listElement.innerHTML = null;
+    for (let person of listOfPlayers) {
+        let bluePlayer = new blueTeammate(person.id, person.name)
+        if (person.id === id) {
+            blueTeam.push(bluePlayer)
+            console.log(blueTeam)
+        }
+    }
+    blueTeam.map(person => {
+        const li = document.createElement('li')
+        li.appendChild(document.createTextNode(`${person.name} - ${person.teamColor} team - Go ${person.mascot}s!`))
+        listElement.append(li)
+    })
+    
+}
+
+// const assignTeam = (x) => {
+//     console.log(x.parentElement.lastChild)
+// }

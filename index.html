@@ -16,6 +16,11 @@
           <h4>List Of People</h4>
           <h5 id="peopleList"></h5>
           <ul id="people"></ul>
+          <div id="newPersonInput">
+            <label for="createPerson">Create new person</label>
+            <input type="text" name="createPerson" id="createPerson" placeholder="First and Last Name">
+            <button id="newPersonSubmit">Submit</button>
+        </div>
       </div>
       <button id="listButton" onclick="listPeopleChoices()">List People</button>
       <div class="players">
@@ -26,11 +31,25 @@
       <div class="teams">
           <div>
               <h4>Blue Team</h4>
+              <h6>Click on player to remove from team</h6>
               <ul id="blue"></ul>
-          </div>
-          <div>
-              <h4>Red Team</h4>
-              <ul id="red"></ul>
+            </div>
+            <div>
+                <h4>Red Team</h4>
+                <h6>Click on player to remove from team</h6>
+                <ul id="red"></ul>
+            </div>
+        </div>
+        <div class="teams">
+            <div>
+                <h4>Green Team</h4>
+                <h6>Click on player to remove from team</h6>
+                <ul id="green"></ul>
+            </div>
+            <div>
+                <h4>Pink Team</h4>
+                <h6>Click on player to remove from team</h6>
+                <ul id="pink"></ul>
           </div>
       </div>
   </div>

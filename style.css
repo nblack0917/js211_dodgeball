@@ -6,6 +6,10 @@ body {
 
 h4 {
     font-weight: 900;
+    margin-bottom: 5px;
+}
+h6 {
+    margin: 0;
 }
 
 li {
@@ -23,7 +27,7 @@ li {
     text-align: center;
 }
 
-#people, #players, #red, #blue{
+#people, #players, #red, #blue, #green, #pink{
     text-align: left;
     list-style: none;
     padding: 0;
@@ -31,6 +35,10 @@ li {
 
 #people button {
     margin-right: 10px;
+}
+
+#newPersonInput {
+    display: none;
 }
 
 .players {
@@ -45,22 +53,48 @@ li {
 #players button:nth-child(2) {
     color: white;
     background: tomato;
+}
+#players button:nth-child(3) {
+    color: white;
+    background: mediumseagreen;
+    margin: 0 10px;
+}
+#players button:nth-child(4) {
+    color: white;
+    background: plum;
     margin-right: 10px;
 }
 
 .teams {
     display: flex;
+    align-items: flex-start;
+    margin: 20px 0;
 }
 .teams div {
     display: flex;
     flex-direction: column;
     width: 400px;
-    justify-content: center;
+    height: 210px;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 50px;
     background: lightskyblue;
+    color: rgb(52, 86, 187);
 }
 
 .teams div:nth-child(2) {
     background: tomato;
+    color: rgb(129, 27, 27);
+}
+.teams:nth-child(odd) div:nth-child(1) {
+    background: mediumseagreen;
+    color: darkgreen;
+}
+.teams:nth-child(odd) div:nth-child(2) {
+    background: plum;
+    color: darkmagenta;
+}
+
+.teams li:hover {
+    cursor: pointer;
 }

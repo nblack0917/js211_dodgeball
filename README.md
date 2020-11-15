@@ -20,3 +20,7 @@ player List
 
 display teams players with team color and mascot
 
+arrOfPeople > new Player > teamColor extends Player  
+
+to remove:
+    teamColor > pass back into new Player  //must carry over all key/values to bring back
